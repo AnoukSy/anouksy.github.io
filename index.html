@@ -1,23 +1,198 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
+<head> 
+  <title> Wherever you are from </title>
+  <style type="text/css">
+  body {
+    width: 100%;
+  background-color: #000000; 
+  
+  }
 
-<div class="home">
+  img {width: 100%; height: auto;}
+  .wrapper {
+    width: 100%;
+    display: grid;
+    grid-gap:50px;
+    grid-template-columns: 1fr 3fr 3fr 3fr 3fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  
+.wrapperQ {
+    width: 100%;
+    display: grid;
+    grid-gap:50px;
+    grid-template-columns: 1fr 4fr 4fr 4fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  
 
-  <h1 class="page-heading"> Hello world </h1>
+  .goTest {color: #FFFFFF; cursor:pointer;}
+  .navL{
+    align-self: center;
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;}
+  .navR{
+    align-self: center;
+    align-items: center;
+    grid-column: 6 / 7;
+    grid-row: 1 / 4;}
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+.navL img {width:35px }
+.navR img {width:35px }
+.flag {}
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+  </style>
+  <script type="text/javascript">
+var wherever=getQueryVariable('wherever')
+var flag=getQueryVariable('flag')
+var allFlags=''
 
-</div>
+    function  goTest()
+      {
+        window.location='Qtest.html';
+      }
+    function setFlags() 
+      {
+        imgDir='_images/';
+        document.body.style.background= '#000000';
+        for (var i = 1; i <=12; i++) 
+          { 
+            if (flag=='' | i>1 )
+              {
+                if (i>1) {F=randomFlag()}
+              }
+            else
+              {F=flag}
+
+             if (F!='') 
+              {
+                imgSrc=imgDir+F+'.png';
+                checkImageExists(i,imgSrc) 
+//                setIMG(i,imgSrc);
+//                checkImage(imgSrc,function(){setIMG(i,imgSrc)},function(){return false})
+              }
+          }
+
+      }
+  
+function setIMG(i,imgSrc)
+  {
+      C='<img title="'+wherever+'" src="'+imgSrc+'">';
+      document.getElementById('flag'+i).innerHTML=C;
+  }  
+
+function checkImageExists(i,imageURL) {
+var imageData = new Image();
+imageData.onload = function() {
+setIMG(i,imageURL);
+};
+imageData.onerror = function() {
+return false;
+};
+imageData.src = imageURL;
+}
+
+
+
+function checkImage(imageSrc, good, bad) {
+    var img = new Image();
+    img.onload = good; 
+    img.onerror = bad;
+    img.src = imageSrc;
+}
+
+
+
+
+function randomFlag()
+  {
+    F=''
+
+    for (var i = 1; i <7 ; i++) 
+      {
+        V=3
+        if (i==1 |i==6 ) {V=2}
+        R=Math.floor(Math.random() * V) + 1  ;
+        L=String.fromCharCode(64+R)
+        F=F+L
+      }
+      return F;
+   }
+
+
+
+
+function getQueryVariable(variable) 
+{
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    V=''
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            V=decodeURIComponent(pair[1])
+            return V;
+        }
+    }
+    return V;
+}
+
+
+
+  </script>
+</head>
+<body> 
+  <div class="wrapper">
+    <div class="navL" onclick="setFlags()"> 
+      <img src="_images/NA_White.png" onclick="goBack()"> 
+    </div>
+    <div id="flag1" onclick="goTest()" class="goTest">
+      <h1> Werever you are from... </h1> 
+      <p> Take 10 seconds discover wherever you are from </p>
+    </div>
+    <div id="flag2" class="flag">
+      <img src="_images/AAAAAA.png">
+    </div>
+    <div id="flag3" class="flag">
+      <img src="_images/AAAAAB.png">
+    </div>
+    <div id="flag4" class="flag">
+      <img src="_images/AAAABB.png">
+    </div>
+    <div id="flag5" class="flag">
+      <img src="_images/AAAACA.png">
+    </div>
+    <div id="flag6" class="flag">
+      <img src="_images/AAAACB.png">
+    </div>
+     <div id="flag7" class="flag">
+      <img src="_images/AAABAA.png">
+    </div>
+     <div id="flag8" class="flag">
+      <img src="_images/AAABAB.png">
+    </div>
+     <div id="flag9" class="flag">
+      <img src="_images/AABAAA.png">
+    </div>
+     <div id="flag10" class="flag">
+      <img src="_images/AABABB.png">
+    </div>
+     <div id="flag11" class="flag">
+      <img src="_images/AABACA.png">
+    </div>
+     <div id="flag12" class="flag">
+      <img src="_images/AABACB.png">
+    </div>
+    <div class="navR"> 
+      <img src="_images/SI_White.png" onclick="goBack()"> 
+    </div>
+
+  </div>
+  </div>
+</body>
+<script type="text/javascript">
+  setFlags()
+</script>
+</html>
